@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guanocoder.javafxapp.MyController">
+    <children>
+        <VBox layoutX="20.0" layoutY="20.0" spacing="8.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+                <HBox>
+                    <children>
+                        <Label fx:id="lblMasthead" layoutX="286.0" layoutY="39.0" text="Label" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox layoutX="85.0" layoutY="66.0" spacing="6.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                    <children>
+                        <TextField fx:id="txtInput" layoutX="85.0" layoutY="66.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnSubmit" layoutX="234.0" layoutY="66.0" mnemonicParsing="false" onAction="#submitHandler" text="Submit" />
+                    </children>
+                </HBox>
+                <HBox fx:id="hbxContainer" alignment="TOP_RIGHT" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
