@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guanocoder.javafxapp.MyController">
     <children>
         <VBox layoutX="20.0" layoutY="20.0" spacing="8.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -27,6 +24,19 @@
                     </children>
                 </HBox>
                 <HBox fx:id="hbxContainer" alignment="TOP_RIGHT" />
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label text="Examples of alert dialogs:" />
+               </children>
+            </HBox>
+                <HBox spacing="4.0">
+                   <children>
+                      <Button mnemonicParsing="false" onAction="#showInformation" text="Information" />
+                      <Button mnemonicParsing="false" onAction="#showWarning" text="Warning" />
+                      <Button mnemonicParsing="false" onAction="#showConfirmation" text="Confirmation" />
+                      <Button mnemonicParsing="false" onAction="#showInputDialog" text="Input Dialog" />
+                   </children>
+                </HBox>
             </children>
         </VBox>
     </children>

@@ -4,10 +4,10 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+
+import java.util.Optional;
 
 public class MyController {
 
@@ -51,7 +51,8 @@ public class MyController {
         });
     }
 
-    public static void simulateDelay(Runnable runnable, int delay){
+    // practically like javascript's setTimeout() method
+    private static void simulateDelay(Runnable runnable, int delay){
         new Thread(() -> {
             try {
                 Thread.sleep(delay);
@@ -62,6 +63,65 @@ public class MyController {
             }
         }).start();
     }
+
+    public void showInformation() {
+        showInformation(
+                "This is an information alert!",
+                "This is the description for the information alert that is displayed to the user."
+        );
+    }
+
+    public void showWarning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText("This is a warning alert!");
+        alert.setContentText("This is the warning content message that is displayed to the user.");
+        alert.showAndWait();
+    }
+
+    public void showConfirmation() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Please confirm!");
+        alert.setContentText("This is the confirmation message that is displayed to the user.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK) {
+            showInformation("You've chosen \"OK\"");
+        } else {
+            showInformation("You've cancelled");
+        }
+    }
+
+    public void showInputDialog() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Input dialog");
+        dialog.setHeaderText("Input your input");
+        dialog.setContentText("This is the content text of an input dialog");
+        Optional<String> result = dialog.showAndWait();
+        if(result.isPresent()) {
+            if(!result.get().isEmpty())
+                showInformation("You have input: " + result.get());
+            else
+                showInformation("You haven't input a thing!");
+        } else {
+            showInformation("You've cancelled!");
+        }
+    }
+
+    private void showInformation(String headerText) {
+        this.showInformation(headerText, null);
+    }
+
+    private void showInformation(String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information alert");
+        alert.setHeaderText(headerText);
+        if(contentText != null && !contentText.isEmpty()) {
+            alert.setContentText(contentText);
+        }
+        alert.showAndWait();
+    }
+
 
 }
 
