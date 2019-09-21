@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guanocoder.javafxapp.MyListViewController">
+   <children>
+      <TableView fx:id="tableUserList" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="columnUserName" minWidth="60.0" prefWidth="100.0" text="username" />
+          <TableColumn fx:id="columnFirstName" minWidth="60.0" prefWidth="100.0" text="first name" />
+            <TableColumn fx:id="columnLastName" minWidth="60.0" prefWidth="120.0" text="last name" />
+            <TableColumn fx:id="columnCreatedDate" minWidth="60.0" prefWidth="100.0" text="created date" />
+            <TableColumn fx:id="columnLastLoginDate" minWidth="60.0" prefWidth="140.0" text="last login date" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
