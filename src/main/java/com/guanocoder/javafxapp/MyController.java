@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class MyController {
@@ -23,6 +24,8 @@ public class MyController {
     @FXML
     private HBox hbxContainer;
 
+    @FXML
+    private DatePicker datePicker;
 
     private Button btnContinue;
     private EventHandler<ActionEvent> continueHandler;
@@ -39,6 +42,13 @@ public class MyController {
         if(btnContinue == null) {
             simulateDelay(this::createContinueButton, 500 + (int)(Math.random() * 1000));
         }
+    }
+
+    public void initialize() {
+        //datePicker.setValue(LocalDate.now());
+        datePicker.setValue(LocalDate.of(2019, 9, 21));
+        datePicker.setShowWeekNumbers(false);
+        datePicker.setOnAction(event -> showInformation("You have chosen: " + datePicker.getValue()));
     }
 
     private void createContinueButton() {
