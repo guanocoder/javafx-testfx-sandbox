@@ -4,9 +4,15 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -132,6 +138,17 @@ public class MyController {
         alert.showAndWait();
     }
 
+    public void openTableViewOnMainWindow() throws IOException, WindowManager.PrimaryStageNotSetException {
+        WindowManager.getInstance().openOnPrimaryStage("/MyListView.fxml", "TableView example");
+    }
+
+    public void openTableViewAsSeparateWindow()throws IOException {
+        WindowManager.getInstance().openAsApplicationModal("/MyListView.fxml", "TableView example", 480, 275);
+    }
+
+    public void openTableViewAsChildWindow() throws IOException {
+        WindowManager.getInstance().openAsWindowModal("/MyListView.fxml", "TableView example");
+    }
 
 }
 
