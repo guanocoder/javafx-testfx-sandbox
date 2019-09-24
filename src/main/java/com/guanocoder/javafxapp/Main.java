@@ -12,8 +12,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        WindowManager.getInstance().setPrimaryStage(primaryStage);
-        WindowManager.getInstance().openOnPrimaryStage("/MyView.fxml", "Hello World!");
+        WindowManager.setPrimaryStage(primaryStage);
+        WindowManager.create("/MyView.fxml", "Hello World!").show();
     }
 
     public static void main(String[] args) {

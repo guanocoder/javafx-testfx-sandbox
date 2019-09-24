@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class WindowManager {
+public class WindowManager<T> {
 
     public static class CannotReplacePrimaryStageException extends Exception {
         public CannotReplacePrimaryStageException() {
@@ -22,73 +22,73 @@ public class WindowManager {
         }
     }
 
-    private static WindowManager instance;
-
+    private static Stage primaryStage;
     private final static int DEFAULT_WIDTH = 480;
     private final static int DEFAULT_HEIGHT = 360;
 
-    private Stage primaryStage;
+    private FXMLLoader loader;
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
+    private T controller;
 
-    private WindowManager() {}
-
-    public static synchronized WindowManager getInstance() {
-        if(instance == null) {
-            instance = new WindowManager();
-        }
-        return instance;
+    private WindowManager(Stage stage, String viewPath, String title, double width, double height) throws IOException {
+        this.stage = stage;
+        loader = new FXMLLoader();
+        root = loader.load(getClass().getResourceAsStream(viewPath));
+        controller = loader.getController();
+        scene = new Scene(root, width, height);
+        stage.setTitle(title);
+        stage.setScene(scene);
     }
 
-    public synchronized void setPrimaryStage(Stage primaryStage) throws CannotReplacePrimaryStageException {
-        if(this.primaryStage != null) {
-            throw new CannotReplacePrimaryStageException();
-        }
-        this.primaryStage = primaryStage;
-    }
-
-    public void openOnPrimaryStage(String viewPath, String windowTitle) throws IOException, PrimaryStageNotSetException {
+    public static WindowManager create(String viewPath, String title) throws IOException, PrimaryStageNotSetException {
         double width, height;
         Stage primaryStage = getPrimaryStage();
         width = primaryStage.getWidth();
         height = primaryStage.getHeight();
-        openWindow(getPrimaryStage(), viewPath, windowTitle, width, height);
+        return WindowManager.create(viewPath, title, width, height);
     }
 
-    // Opens as an independent window
-    public void openAsApplicationModal(String viewPath, String windowTitle) throws IOException {
-        openAsApplicationModal(viewPath, windowTitle, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    public static WindowManager create(String viewPath, String title, double width, double height) throws IOException, PrimaryStageNotSetException {
+        return WindowManager.create(getPrimaryStage(), viewPath, title, width, height);
     }
 
-    public void openAsApplicationModal(String viewPath, String windowTitle, int width, int height) throws IOException {
-        Stage newStage = new Stage();
-        newStage.initModality(Modality.NONE);
-        openWindow(newStage, viewPath, windowTitle, width, height);
+    public static WindowManager create(Stage stage, String viewPath, String title) throws IOException {
+        return WindowManager.create(stage, viewPath, title, DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
-    // Opens as a child window and prevents focus on parent window
-    public void openAsWindowModal(String viewPath, String windowTitle) throws IOException {
-        openAsWindowModal(viewPath, windowTitle, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    public static WindowManager create(Stage stage, String viewPath, String title, double width, double height) throws IOException {
+        return new WindowManager(stage, viewPath, title, width, height);
     }
 
-    public void openAsWindowModal(String viewPath, String windowTitle, int width, int height) throws IOException {
-        Stage newStage = new Stage();
-        newStage.initOwner(primaryStage);
-        newStage.initModality(Modality.WINDOW_MODAL);
-        openWindow(newStage, viewPath, windowTitle, width, height);
+    public static synchronized void setPrimaryStage(Stage primaryStage) throws CannotReplacePrimaryStageException {
+        if(WindowManager.primaryStage != null) {
+            throw new CannotReplacePrimaryStageException();
+        }
+        WindowManager.primaryStage = primaryStage;
     }
 
-
-    private synchronized Stage getPrimaryStage() throws PrimaryStageNotSetException {
-        if(this.primaryStage == null) {
+    public static synchronized Stage getPrimaryStage() throws PrimaryStageNotSetException {
+        if(WindowManager.primaryStage == null) {
             throw new PrimaryStageNotSetException();
         }
-        return primaryStage;
+        return WindowManager.primaryStage;
     }
 
-    private void openWindow(Stage stage, String viewPath, String windowTitle, double width, double height) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        Parent root = (Parent) loader.load(getClass().getResourceAsStream(viewPath));
-        stage.setTitle(windowTitle);
-        stage.setScene(new Scene(root, width, height));
+    public Stage getStage() {
+        return stage;
+    }
+
+    public T getController() {
+        return controller;
+    }
+
+    public void show() {
         stage.show();
+    }
+
+    public void showAndWait() {
+        stage.showAndWait();
     }
 }

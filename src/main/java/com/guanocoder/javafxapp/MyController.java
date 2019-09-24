@@ -1,19 +1,18 @@
 package com.guanocoder.javafxapp;
 
+import com.guanocoder.javafxapp.models.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 public class MyController {
@@ -139,15 +138,21 @@ public class MyController {
     }
 
     public void openTableViewOnMainWindow() throws IOException, WindowManager.PrimaryStageNotSetException {
-        WindowManager.getInstance().openOnPrimaryStage("/MyListView.fxml", "TableView example");
+
+        WindowManager.create("/MyListView.fxml", "TableView example").show();
     }
 
     public void openTableViewAsSeparateWindow()throws IOException {
-        WindowManager.getInstance().openAsApplicationModal("/MyListView.fxml", "TableView example", 480, 275);
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.NONE);
+        WindowManager.create(newStage,"/MyListView.fxml", "TableView example", 480, 275).show();
     }
 
-    public void openTableViewAsChildWindow() throws IOException {
-        WindowManager.getInstance().openAsWindowModal("/MyListView.fxml", "TableView example");
+    public void openTableViewAsChildWindow() throws IOException, WindowManager.PrimaryStageNotSetException {
+        Stage newStage = new Stage();
+        newStage.initOwner(WindowManager.getPrimaryStage());
+        newStage.initModality(Modality.WINDOW_MODAL);
+        WindowManager.create(newStage,"/MyListView.fxml", "TableView example", 480, 275).show();
     }
 
 }
