@@ -55,6 +55,11 @@
                         <Button mnemonicParsing="false" onAction="#openTableViewAsChildWindow" text="List as child window" />
                     </children>
                 </HBox>
+                <HBox>
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#openUserView" text="Open UserView" />
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </children>

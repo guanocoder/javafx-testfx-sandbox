@@ -155,5 +155,11 @@ public class MyController {
         WindowManager.create(newStage,"/MyListView.fxml", "TableView example", 480, 275).show();
     }
 
+    public void openUserView() throws IOException {
+        Stage stage = new Stage();
+        WindowManager<UserViewController> window = WindowManager.create(stage,"/UserView.fxml","Edit User");
+        window.getController().setModel(new User("terabit", "Terran", "Bitter", new Date(2017, 7, 7), new Date()));
+        window.showAndWait();
+    }
 }
 
