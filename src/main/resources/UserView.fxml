@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guanocoder.javafxapp.UserViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guanocoder.javafxapp.UserViewController">
     <children>
         <VBox layoutX="250.0" layoutY="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <HBox>
+                <HBox styleClass="form-header">
                     <children>
-                        <Label text="Username" />
-                        <TextField fx:id="txtUserName" />
+                        <Label text="Edit User Form" />
                     </children>
                 </HBox>
-                <HBox>
+                <VBox styleClass="form">
                     <children>
-                        <Label text="First Name" />
-                        <TextField fx:id="txtFirstName" />
+                        <HBox styleClass="form-row">
+                            <children>
+                                <Label styleClass="form-field-label" text="Username:" />
+                                <TextField fx:id="txtUserName" />
+                            </children>
+                        </HBox>
+                        <HBox styleClass="form-row">
+                            <children>
+                                <Label styleClass="form-field-label" text="First Name:" />
+                                <TextField fx:id="txtFirstName" />
+                            </children>
+                        </HBox>
+                        <HBox styleClass="form-row">
+                            <children>
+                                <Label styleClass="form-field-label" text="Last Name:" />
+                                <TextField fx:id="txtLastName" />
+                            </children>
+                        </HBox>
+                        <HBox styleClass="form-row">
+                            <children>
+                                <Label styleClass="form-field-label" text="Date created:" />
+                                <DatePicker fx:id="dateCreated" />
+                            </children>
+                        </HBox>
+                        <HBox styleClass="form-row">
+                            <children>
+                                <Label styleClass="form-field-label" text="Last login date:" />
+                                <DatePicker fx:id="dateLastLogin" />
+                            </children>
+                        </HBox>
                     </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Label text="Last Name" />
-                        <TextField fx:id="txtLastName" />
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Label text="Date created" />
-                        <DatePicker fx:id="dateCreated" />
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Label text="Last login date" />
-                        <DatePicker fx:id="dateLastLogin" />
-                    </children>
-                </HBox>
+                </VBox>
                 <HBox VBox.vgrow="ALWAYS" />
-                <HBox alignment="BOTTOM_RIGHT">
+                <HBox styleClass="form-footer">
                     <children>
-                        <Button mnemonicParsing="false" text="Cancel" />
-                        <Button mnemonicParsing="false" text="Save" />
+                        <Button mnemonicParsing="false" styleClass="form-button" text="Cancel" />
+                        <Button mnemonicParsing="false" styleClass="form-button" text="Save" />
                     </children>
                 </HBox>
             </children>

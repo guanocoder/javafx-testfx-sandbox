@@ -1,0 +1,34 @@
+.form-field-label {
+    -fx-pref-width: 200;
+    -fx-alignment: center-right;
+    -fx-padding: 4 16 4 4;
+}
+
+.form-row {
+    -fx-padding: 4 4 4 4;
+}
+
+.form-header {
+    -fx-padding: 20;
+    -fx-pref-height: 80;
+    -fx-background-color: Orange;
+}
+
+.form-header .label {
+    -fx-font-size: 32;
+    -fx-text-fill: white;
+}
+
+.form {
+    -fx-padding: 16 4 4 4;
+}
+
+.form-footer {
+    -fx-alignment: bottom-right;
+    -fx-spacing: 4;
+    -fx-padding: 4;
+}
+
+.form-button {
+    -fx-pref-width: 120;
+}
