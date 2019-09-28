@@ -158,7 +158,7 @@ public class MyController {
     public void openUserView() throws IOException {
         Stage stage = new Stage();
         WindowManager<UserViewController> window = WindowManager.create(stage,"/UserView.fxml","Edit User");
-        window.getController().setModel(new User("terabit", "Terran", "Bitter", new Date(2017, 7, 7), new Date()));
+        window.getController().setModel(new User("terabit", "Terran", "Bitter", Utils.localDateFromString("07/07/2017"), Utils.localDateFromString("28/08/2019")));
         // set up CSS file programmatically
         //window.getStage().getScene().getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         window.show();

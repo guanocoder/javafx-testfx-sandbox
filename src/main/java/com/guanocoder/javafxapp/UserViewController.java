@@ -33,11 +33,8 @@ public class UserViewController {
         txtUserName.setText(model.getUserName());
         txtFirstName.setText(model.getFirstName());
         txtLastName.setText(model.getLastName());
-        Date createdDate, lastLoginDate;
-        createdDate = model.getCreatedDate();
-        lastLoginDate = model.getLastLoginDate();
-        dateCreated.setValue(LocalDate.of(createdDate.getYear(), createdDate.getMonth(), createdDate.getDay()));
-        dateLastLogin.setValue(LocalDate.of(lastLoginDate.getYear(), lastLoginDate.getMonth(), lastLoginDate.getDay()));
+        dateCreated.setValue(model.getCreatedDate());
+        dateLastLogin.setValue(model.getLastLoginDate());
     }
 
     private void initializeHandlers() {
@@ -46,16 +43,7 @@ public class UserViewController {
         txtFirstName.textProperty().addListener((observable, oldValue, newValue) -> model.setUserName(newValue));
         txtLastName.textProperty().addListener((observable, oldValue, newValue) -> model.setUserName(newValue));
 
-        dateCreated.setOnAction(event -> {
-            model.setCreatedDate(
-                    Date.from(dateCreated.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())
-            );
-        });
-
-        dateLastLogin.setOnAction(event -> {
-            model.setLastLoginDate(
-                    Date.from(dateLastLogin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())
-            );
-        });
+        dateCreated.setOnAction(event -> model.setCreatedDate(dateCreated.getValue()));
+        dateLastLogin.setOnAction(event -> model.setLastLoginDate(dateLastLogin.getValue()));
     }
 }

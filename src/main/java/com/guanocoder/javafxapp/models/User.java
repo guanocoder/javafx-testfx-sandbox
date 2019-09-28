@@ -1,5 +1,6 @@
 package com.guanocoder.javafxapp.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class User {
@@ -7,10 +8,10 @@ public class User {
     private String userName;
     private String firstName;
     private String lastName;
-    private Date createdDate;
-    private Date lastLoginDate;
+    private LocalDate createdDate;
+    private LocalDate lastLoginDate;
 
-    public User(String userName, String firstName, String lastName, Date createdDate, Date lastLoginDate) {
+    public User(String userName, String firstName, String lastName, LocalDate createdDate, LocalDate lastLoginDate) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,19 +43,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getLastLoginDate() {
+    public LocalDate getLastLoginDate() {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(Date lastLoginDate) {
+    public void setLastLoginDate(LocalDate lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 }
