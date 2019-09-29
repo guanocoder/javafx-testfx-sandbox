@@ -7,8 +7,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class WindowManager<T> {
+
+    private static Map<Object, WindowManager> controllerMap = new Hashtable<>();
 
     public static class CannotReplacePrimaryStageException extends Exception {
         public CannotReplacePrimaryStageException() {
@@ -40,6 +44,8 @@ public class WindowManager<T> {
         scene = new Scene(root, width, height);
         stage.setTitle(title);
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> controllerMap.remove(controller));
+        controllerMap.put(controller, this);
     }
 
     public static WindowManager create(String viewPath, String title) throws IOException, PrimaryStageNotSetException {
@@ -74,6 +80,13 @@ public class WindowManager<T> {
             throw new PrimaryStageNotSetException();
         }
         return WindowManager.primaryStage;
+    }
+
+    public static synchronized void close(Object controller) {
+        if(controllerMap.containsKey(controller)) {
+            WindowManager window = controllerMap.remove(controller);
+            window.stage.close();
+        }
     }
 
     public Stage getStage() {

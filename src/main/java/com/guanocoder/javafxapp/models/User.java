@@ -5,11 +5,13 @@ import java.util.Date;
 
 public class User {
 
-    private String userName;
-    private String firstName;
-    private String lastName;
-    private LocalDate createdDate;
-    private LocalDate lastLoginDate;
+    private String userName = "";
+    private String firstName = "";
+    private String lastName = "";
+    private LocalDate createdDate = null;
+    private LocalDate lastLoginDate = null;
+
+    public User() {}
 
     public User(String userName, String firstName, String lastName, LocalDate createdDate, LocalDate lastLoginDate) {
         this.userName = userName;

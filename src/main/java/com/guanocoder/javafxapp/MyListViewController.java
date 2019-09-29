@@ -9,15 +9,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 
-public class MyListViewController {
+public class MyListViewController implements EventBusSubscriber {
 
-    @FXML private TableView tableUserList;
+    @FXML private TableView<User> tableUserList;
     @FXML private TableColumn columnUserName, columnFirstName, columnLastName, columnCreatedDate, columnLastLoginDate;
+
+    public MyListViewController() {
+        EventBus.subscribe(this);
+    }
 
     private ObservableList<User> userList = FXCollections.observableArrayList(
             new User("ugly_joe", "Joseph", "Palacio", Utils.localDateFromString("08/07/2016"), Utils.localDateFromString("18/03/2019")),
@@ -39,6 +41,17 @@ public class MyListViewController {
         columnLastLoginDate.setCellValueFactory(new PropertyValueFactory<User, LocalDate>("lastLoginDate"));
         columnLastLoginDate.setCellFactory(column -> createFormattedDateCell());
         tableUserList.setItems(userList);
+
+        tableUserList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            //System.out.println("Row selected: " + ((newValue != null) ? newValue.getUserName() : null));
+        });
+
+        tableUserList.setOnMousePressed(event -> {
+            if(event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                //System.out.println("Double click detected on " + tableUserList.getSelectionModel().getSelectedItem().getUserName());
+                EventBus.updateUser(tableUserList.getSelectionModel().getSelectedItem());
+            }
+        });
     }
 
     private TableCell<User, LocalDate> createFormattedDateCell() {
@@ -53,5 +66,22 @@ public class MyListViewController {
                 }
             }
         };
+    }
+
+    @Override
+    public void userUpdated(User user) {
+        int index = userList.indexOf(user);
+        if(index >= 0)
+            userList.set(index, user);
+    }
+
+    @Override
+    public void userDeleted(User user) {
+        userList.remove(user);
+    }
+
+    @Override
+    public void userCreated(User user) {
+        userList.add(user);
     }
 }

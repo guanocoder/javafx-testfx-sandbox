@@ -49,8 +49,8 @@
                 <HBox VBox.vgrow="ALWAYS" />
                 <HBox styleClass="form-footer">
                     <children>
-                        <Button mnemonicParsing="false" styleClass="form-button" text="Cancel" />
-                        <Button mnemonicParsing="false" styleClass="form-button" text="Save" />
+                        <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="form-button" text="Cancel" />
+                        <Button mnemonicParsing="false" onAction="#handleSave" styleClass="form-button" text="Save" />
                     </children>
                 </HBox>
             </children>

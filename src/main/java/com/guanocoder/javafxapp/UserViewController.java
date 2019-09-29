@@ -5,10 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
 public class UserViewController {
 
     @FXML
@@ -40,10 +36,19 @@ public class UserViewController {
     private void initializeHandlers() {
 
         txtUserName.textProperty().addListener((observable, oldValue, newValue) -> model.setUserName(newValue));
-        txtFirstName.textProperty().addListener((observable, oldValue, newValue) -> model.setUserName(newValue));
-        txtLastName.textProperty().addListener((observable, oldValue, newValue) -> model.setUserName(newValue));
+        txtFirstName.textProperty().addListener((observable, oldValue, newValue) -> model.setFirstName(newValue));
+        txtLastName.textProperty().addListener((observable, oldValue, newValue) -> model.setLastName(newValue));
 
         dateCreated.setOnAction(event -> model.setCreatedDate(dateCreated.getValue()));
         dateLastLogin.setOnAction(event -> model.setLastLoginDate(dateLastLogin.getValue()));
+    }
+
+    public void handleCancel() {
+        WindowManager.close(this);
+    }
+
+    public void handleSave() {
+        EventBus.userUpdated(model);
+        WindowManager.close(this);
     }
 }
